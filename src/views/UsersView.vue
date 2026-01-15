@@ -1,3 +1,43 @@
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+const { users, loading, error, userCount, hasUsers } = storeToRefs(userStore)
+
+import { onMounted } from 'vue'
+onMounted(() => {
+  userStore.fetchUsers()
+})
+</script>
 <template>
-  <div>user list</div>
+  <div class="p-4">
+    <button
+      @click.prevent="userStore.fetchUsers()"
+      :disabled="loading"
+      class="px-4 py-2 bg-blue-500 text-white rounded mb-4"
+    >
+      {{ loading ? 'Loading...' : 'Fetch Users' }}
+    </button>
+
+    <!-- Error message -->
+    <div v-if="error" class="bg-red-100 text-red-700 p-3 rounded mb-4">
+      {{ error }}
+    </div>
+
+    <!-- Loading state -->
+    <div v-if="loading" class="text-gray-600">Loading users...</div>
+
+    <!-- Users list -->
+    <div v-else-if="hasUsers" class="space-y-2">
+      <p class="text-sm mb-2">Total users: {{ userCount }}</p>
+      <div v-for="user in users" :key="user.id" class="p-4 border border-gray-300 rounded">
+        <p class="font-semibold">{{ user.name }}</p>
+        <p class="text-sm text-gray-300">{{ user.email }}</p>
+      </div>
+    </div>
+
+    <!-- No users message -->
+    <div v-else class="text-gray-500">No users found. Click "Fetch Users" to load data.</div>
+  </div>
 </template>
