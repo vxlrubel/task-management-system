@@ -10,11 +10,15 @@ const generalItems = reactive([
   { name: 'Users', slug: '/users', icon: 'U' },
 ])
 
+const projectItems = reactive([{ name: 'All Projects', slug: '/projects', icon: 'P' }])
+const teamsItems = reactive([{ name: 'All Teams', slug: '/teams', icon: 'T' }])
+const usersItems = reactive([{ name: 'All Users', slug: '/users', icon: 'T' }])
+
 const menuGroup = reactive([
   { name: 'general', items: generalItems },
-  { name: 'projects', items: generalItems, addNew: '/project/add-new' },
-  { name: 'team', items: generalItems, addNew: '/team/add-new' },
-  { name: 'users', items: generalItems, addNew: '/user/add-new' },
+  { name: 'projects', items: projectItems, addNew: '/project/add-new' },
+  { name: 'team', items: teamsItems, addNew: '/team/add-new' },
+  { name: 'users', items: usersItems, addNew: '/user/add-new' },
   { name: 'appearance', items: generalItems },
 ])
 </script>
