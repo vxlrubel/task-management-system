@@ -10,6 +10,11 @@ const router = createRouter({
       component: DashboardView,
     },
     {
+      path: '/my-tasks',
+      name: 'My Tasks',
+      component: () => import('../views/MytasksView.vue'),
+    },
+    {
       path: '/users',
       name: 'Users',
       component: () => import('../views/UsersView.vue'),
