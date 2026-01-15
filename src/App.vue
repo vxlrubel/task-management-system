@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import PageTitle from './components/PageTitle.vue'
+import IconPlus from './components/icons/IconPlus.vue'
 import { reactive } from 'vue'
 
 const generalItems = reactive([
@@ -11,26 +12,37 @@ const generalItems = reactive([
 
 const menuGroup = reactive([
   { name: 'general', items: generalItems },
-  { name: 'task', items: generalItems },
-  { name: 'team', items: generalItems },
-  { name: 'projects', items: generalItems },
-  { name: 'Appearance', items: generalItems },
+  { name: 'projects', items: generalItems, addNew: '/project/add-new' },
+  { name: 'team', items: generalItems, addNew: '/team/add-new' },
+  { name: 'users', items: generalItems, addNew: '/user/add-new' },
+  { name: 'appearance', items: generalItems },
 ])
 </script>
 
 <template>
   <div class="flex h-dvh">
-    <aside class="w-75 bg-[#2A2C2E] text-[#f2f3f4] h-dvh px-3">
+    <aside class="w-75 bg-[hsl(210,5%,17%)] text-[#f2f3f4] h-dvh ps-3">
       <RouterLink to="/" class="items-center flex h-10 font-bold">Task Management</RouterLink>
       <nav class="h-[calc(100dvh-40px)] overflow-y-auto scrollbar-hide">
         <template v-if="menuGroup.length">
           <div v-for="(group, index) in menuGroup" :key="'group-' + index + 1" class="mb-5">
-            <div class="text-[13px] capitalize font-medium mb-2">{{ group.name }}</div>
+            <div class="text-[13px] capitalize font-medium mb-2 flex items-center justify-between">
+              <div>{{ group.name }}</div>
+
+              <template v-if="group?.addNew">
+                <RouterLink
+                  :to="group.addNew"
+                  class="cursor-pointer h-6 w-6 flex items-center justify-center"
+                >
+                  <IconPlus />
+                </RouterLink>
+              </template>
+            </div>
             <RouterLink
               v-for="(item, idx) in group.items"
               :key="'item-' + idx + 1"
               :to="item.slug"
-              class="flex mb-1 text-[14px]"
+              class="flex mb-1 text-[14px] hover:bg-[hsl(210,5%,25%)] py-0.5"
             >
               <span
                 class="h-5 w-5 flex items-center justify-center rounded-[3px] bg-blue-500 me-2 text-[12px] font-bold"
