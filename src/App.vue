@@ -5,7 +5,8 @@ import { reactive } from 'vue'
 
 const generalItems = reactive([
   { name: 'Dashboard', slug: '/', icon: 'D' },
-  { name: 'My Task', slug: '/about', icon: 'm' },
+  { name: 'My Task', slug: '/my-task', icon: 'm' },
+  { name: 'Users', slug: '/users', icon: 'u' },
 ])
 
 const menuGroup = reactive([
