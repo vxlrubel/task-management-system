@@ -44,12 +44,10 @@ const menuGroup = reactive([
       </nav>
     </aside>
     <div class="flex-1 h-dvh">
-      <div
-        class="items-center flex h-10 px-4 bg-[#2A2C2E] text-gray-50 border-b border-b-neutral-300"
-      >
+      <div class="items-center flex h-10 px-4 bg-[#2A2C2E] text-[#f2f3f4]">
         <PageTitle />
       </div>
-      <div class="h-[calc(100dvh-40px)] overflow-y-scroll p-3">
+      <div class="h-[calc(100dvh-40px)] overflow-y-scroll p-3 bg-[#1D1F21] text-[#f2f3f4]">
         <RouterView />
       </div>
     </div>
