@@ -6,10 +6,15 @@ import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
-import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
+
+import Toast from 'primevue/toast'
+
+import { useToast } from 'primevue/usetoast'
+
+const toast = useToast()
+
 const userStore = useUserStore()
-const { createUser } = storeToRefs(userStore)
 
 const roles = ref([
   { id: 1, name: 'Admin' },
@@ -26,7 +31,7 @@ const status = ref('active')
 
 const addUser = () => {
   const payload = ref({
-    role_id: role.value.id,
+    role_id: role.value?.id ?? 3,
     name: name.value,
     email: email.value,
     password: password.value,
@@ -36,11 +41,30 @@ const addUser = () => {
 
   //   create a new user
   userStore.createUser(payload.value)
+  successNotice()
+  reset()
+}
+
+const reset = () => {
+  role.value = ''
+  name.value = ''
+  email.value = ''
+  password.value = ''
+}
+
+const successNotice = () => {
+  toast.add({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'User Add Successfully.',
+    life: 3000,
+  })
 }
 </script>
 
 <template>
   <form class="card grid grid-cols-1 gap-4 max-w-100 mx-auto" @submit.prevent="addUser">
+    <Toast />
     <div class="text-center">
       <i class="pi pi-user font-[100px]"></i>
     </div>
