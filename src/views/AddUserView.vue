@@ -7,11 +7,12 @@ import Select from 'primevue/select'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
 import { useUserStore } from '@/stores/user'
-
+import { useRouter } from 'vue-router'
 import Toast from 'primevue/toast'
 
 import { useToast } from 'primevue/usetoast'
 
+const router = useRouter()
 const toast = useToast()
 
 const userStore = useUserStore()
@@ -29,9 +30,9 @@ const password = ref()
 const avatar = ref('admin.png')
 const status = ref('active')
 
-const addUser = () => {
+const addUser = async () => {
   const payload = ref({
-    role_id: role.value?.id ?? 3,
+    role_id: role.value ?? 3,
     name: name.value,
     email: email.value,
     password: password.value,
@@ -40,9 +41,17 @@ const addUser = () => {
   })
 
   //   create a new user
-  userStore.createUser(payload.value)
-  successNotice()
-  reset()
+  const result = await userStore.createUser(payload.value)
+
+  if (result) {
+    setTimeout(() => {
+      router.push('/users')
+    }, 1500)
+    successNotice()
+    reset()
+  } else {
+    throw new Error('User Create failed.')
+  }
 }
 
 const reset = () => {
@@ -102,7 +111,13 @@ const successNotice = () => {
       <InputGroupAddon>
         <i class="pi pi-map"></i>
       </InputGroupAddon>
-      <Select v-model="role" :options="roles" optionLabel="name" placeholder="Select role" />
+      <Select
+        v-model="role"
+        :options="roles"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Select role"
+      />
     </InputGroup>
     <Button type="submit" label="Submit" icon="pi pi-check" />
   </form>
