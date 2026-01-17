@@ -25,14 +25,11 @@ const roles = ref([
 
 const fetchUser = async (userId) => {
   const response = await userStore.fetchUserById(userId)
-
-  //   Set user data
-
-  name.value = response.data?.name
-  email.value = response.data?.email
-  password.value = response.data?.password
-  role.value = response.data?.role_id
-  console.log(response.data.name)
+  console.log(response)
+  name.value = response?.name
+  email.value = response?.email
+  password.value = response?.password
+  role.value = response?.role_id
 }
 
 onMounted(async () => {
