@@ -30,7 +30,7 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  async function fetchUserById(id) {
+  const fetchUserById = async (id) => {
     loading.value = true
     error.value = null
 
@@ -45,7 +45,7 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  async function createUser(userData) {
+  const createUser = async (userData) => {
     loading.value = true
     error.value = null
 
@@ -61,6 +61,21 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  const deleteUser = async (id) => {
+    try {
+      if (!id) {
+        throw new Error('User ID is required')
+      }
+
+      const response = await api.delete(`${apiEndPoint.value}/${id}`)
+      users.value = users.value.filter((user) => user.id !== id)
+      return response.data
+    } catch (error) {
+      console.error('Error deleting user:', error.response?.data || error.message)
+      throw error
+    }
+  }
+
   return {
     users,
     loading,
@@ -70,5 +85,6 @@ export const useUserStore = defineStore('user', () => {
     fetchUsers,
     fetchUserById,
     createUser,
+    deleteUser,
   }
 })

@@ -1,9 +1,10 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
+import Button from 'primevue/button'
 
 const userStore = useUserStore()
-const { users, loading, error, userCount, hasUsers } = storeToRefs(userStore)
+const { users, loading, error, userCount, hasUsers, deleteUser } = storeToRefs(userStore)
 
 import { onMounted } from 'vue'
 onMounted(() => {
@@ -32,7 +33,24 @@ onMounted(() => {
     <div v-else-if="hasUsers" class="space-y-2">
       <p class="text-sm mb-2">Total users: {{ userCount }}</p>
       <div v-for="user in users" :key="user.id" class="p-4 border border-gray-300 rounded">
-        <p class="font-semibold">{{ user.name }}</p>
+        <div class="flex justify-between">
+          <div class="font-medium">{{ user.name }}</div>
+          <div>
+            <button
+              type="button"
+              class="bg-blue-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-blue-600 me-3"
+            >
+              <i class="pi pi-pen-to-square text-sm"></i>
+            </button>
+            <button
+              @click="userStore.deleteUser(user.id)"
+              type="button"
+              class="bg-red-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-red-600"
+            >
+              <i class="pi pi-trash text-sm"></i>
+            </button>
+          </div>
+        </div>
         <p class="text-sm text-gray-300">{{ user.email }}</p>
       </div>
     </div>

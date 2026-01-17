@@ -1,24 +1,24 @@
 {
   "roles": [
     {
-      "id": "1",
+      "id": 1,
       "name": "admin",
       "description": "System Administrator"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "hr",
       "description": "HR Manager"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "employee",
       "description": "Employee User"
     }
   ],
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "role_id": 1,
       "name": "Admin User",
       "email": "admin@example.com",
@@ -27,7 +27,7 @@
       "status": "active"
     },
     {
-      "id": "2",
+      "id": 2,
       "role_id": 2,
       "name": "HR Manager",
       "email": "hr@example.com",
@@ -36,7 +36,7 @@
       "status": "active"
     },
     {
-      "id": "3",
+      "id": 3,
       "role_id": 3,
       "name": "John Employee",
       "email": "john@example.com",
@@ -45,7 +45,7 @@
       "status": "active"
     },
     {
-      "id": "4",
+      "id": 4,
       "role_id": 3,
       "name": "Sara Employee",
       "email": "sara@example.com",
@@ -54,100 +54,28 @@
       "status": "active"
     },
     {
-      "id": "d06c",
-      "role_id": 1,
-      "name": "In aut dolores unde ",
-      "email": "Aut quis in et adipi",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "87c6",
+      "id": "62a5",
       "role_id": 2,
-      "name": "Quasi doloremque bea",
-      "email": "Nulla sit similique",
+      "name": "Mollit est et molest",
+      "email": "Quia tenetur quibusd",
       "password": "Pa$$w0rd!",
       "avatar": "admin.png",
       "status": "active"
     },
     {
-      "id": "5937",
+      "id": "b8dc",
       "role_id": 3,
-      "name": "Molestiae tempor qui",
-      "email": "Sit laboriosam vol",
+      "name": "Ut qui rerum quo ani",
+      "email": "Aperiam numquam mole",
       "password": "Pa$$w0rd!",
       "avatar": "admin.png",
       "status": "active"
     },
     {
-      "id": "3caf",
-      "role_id": 1,
-      "name": "Rubel Mahmud",
-      "email": "rubel@email.com",
-      "password": "asdfljkatest",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "10a2",
+      "id": "993c",
       "role_id": 3,
-      "name": "Culpa dolor aperiam",
-      "email": "Officiis architecto ",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "ea91",
-      "role_id": 1,
-      "name": "Doloremque deleniti ",
-      "email": "Laborum Nisi dolor ",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "feff",
-      "role_id": 3,
-      "name": "Cupidatat nisi archi",
-      "email": "Sit similique eligen",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "e39e",
-      "role_id": 1,
-      "name": "Non voluptas iste ip",
-      "email": "Ea fugit est ipsum",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "48b0",
-      "role_id": 1,
-      "name": "Non voluptas iste ip",
-      "email": "Ea fugit est ipsum",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "60be",
-      "role_id": 2,
-      "name": "Quos consectetur aut",
-      "email": "Pariatur Omnis dolo",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
-    },
-    {
-      "id": "1d27",
-      "role_id": 1,
-      "name": "Exercitation et quia",
-      "email": "Fuga Id proident u",
+      "name": "Voluptatem corrupti",
+      "email": "Veniam cupiditate b",
       "password": "Pa$$w0rd!",
       "avatar": "admin.png",
       "status": "active"
@@ -155,7 +83,7 @@
   ],
   "teams": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Frontend Team",
       "description": "Handles UI and frontend logic",
       "created_by": 2
@@ -163,19 +91,19 @@
   ],
   "team_members": [
     {
-      "id": "1",
+      "id": 1,
       "team_id": 1,
       "user_id": 2,
       "role": "lead"
     },
     {
-      "id": "2",
+      "id": 2,
       "team_id": 1,
       "user_id": 3,
       "role": "member"
     },
     {
-      "id": "3",
+      "id": 3,
       "team_id": 1,
       "user_id": 4,
       "role": "member"
@@ -183,7 +111,7 @@
   ],
   "projects": [
     {
-      "id": "1",
+      "id": 1,
       "team_id": 1,
       "name": "Task Management App",
       "description": "Asana-like project using Vue",
@@ -195,7 +123,7 @@
   ],
   "tasks": [
     {
-      "id": "1",
+      "id": 1,
       "project_id": 1,
       "parent_id": null,
       "title": "Design Dashboard UI",
@@ -208,7 +136,7 @@
       "assigned_to": 3
     },
     {
-      "id": "2",
+      "id": 2,
       "project_id": 1,
       "parent_id": 1,
       "title": "Create Sidebar Component",
@@ -221,7 +149,7 @@
       "assigned_to": 4
     },
     {
-      "id": "3",
+      "id": 3,
       "project_id": 1,
       "parent_id": null,
       "title": "Setup Pinia Stores",
@@ -236,14 +164,14 @@
   ],
   "task_comments": [
     {
-      "id": "1",
+      "id": 1,
       "task_id": 1,
       "user_id": 3,
       "comment": "Dashboard UI base layout completed",
       "created_at": "2026-01-08 10:30:00"
     },
     {
-      "id": "2",
+      "id": 2,
       "task_id": 2,
       "user_id": 4,
       "comment": "Sidebar component structure ready",
@@ -252,7 +180,7 @@
   ],
   "task_activity_logs": [
     {
-      "id": "1",
+      "id": 1,
       "task_id": 1,
       "user_id": 3,
       "action": "status_changed",
@@ -261,7 +189,7 @@
       "created_at": "2026-01-07 09:00:00"
     },
     {
-      "id": "2",
+      "id": 2,
       "task_id": 3,
       "user_id": 2,
       "action": "assigned",
@@ -272,7 +200,7 @@
   ],
   "notifications": [
     {
-      "id": "1",
+      "id": 1,
       "user_id": 3,
       "type": "task_assigned",
       "message": "You have been assigned a new task: Design Dashboard UI",
