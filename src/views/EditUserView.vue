@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import InputGroup from 'primevue/inputgroup'
 import InputGroupAddon from 'primevue/inputgroupaddon'
@@ -11,6 +11,7 @@ import Select from 'primevue/select'
 
 const userStore = useUserStore()
 const route = useRoute()
+const router = useRouter()
 
 const userId = route.params.id
 const name = ref('')
@@ -38,11 +39,31 @@ onMounted(async () => {
 
 const showPassword = ref(false)
 
+const handleSubmit = async () => {
+  const newPayload = {
+    role_id: role.value,
+    name: name.value,
+    email: email.value,
+    password: password.value,
+  }
+
+  const result = await userStore.updateUser(userId, newPayload)
+
+  if (result) {
+    router.push('/users')
+  } else {
+    console.error('Failed to update user')
+  }
+}
+
 // Watch for route param changes
 </script>
 
 <template>
-  <form class="card grid grid-cols-1 gap-4 max-w-100 mx-auto">
+  <form
+    class="card grid grid-cols-1 gap-4 max-w-100 mx-auto"
+    @submit.prevent="handleSubmit(userId, updateData)"
+  >
     <div class="text-center">
       <i class="pi pi-user font-[100px]"></i>
     </div>
