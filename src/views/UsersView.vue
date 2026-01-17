@@ -37,7 +37,7 @@ onMounted(() => {
           <div class="font-medium">{{ user.name }}</div>
           <div>
             <RouterLink
-              :to="'/users/' + user.id"
+              :to="'/user/' + user.id"
               type="button"
               class="bg-blue-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-blue-600 me-3"
             >
