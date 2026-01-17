@@ -60,6 +60,25 @@ export const useUserStore = defineStore('user', () => {
       loading.value = false
     }
   }
+  const updateUser = async (userId, userData) => {
+    loading.value = true
+    error.value = null
+
+    try {
+      const { data } = await api.patch(`${apiEndPoint.value}/${userId}`, userData)
+      const index = users.value.findIndex((user) => user.id === userId)
+      if (index !== -1) {
+        users.value[index] = data
+      }
+
+      return data
+    } catch (err) {
+      error.value = err.response?.data?.message || err.message
+      return null
+    } finally {
+      loading.value = false
+    }
+  }
 
   const deleteUser = async (id) => {
     try {
@@ -85,6 +104,7 @@ export const useUserStore = defineStore('user', () => {
     fetchUsers,
     fetchUserById,
     createUser,
+    updateUser,
     deleteUser,
   }
 })
