@@ -4,7 +4,7 @@ import { useUserStore } from '@/stores/user'
 import { RouterLink } from 'vue-router'
 
 const userStore = useUserStore()
-const { users, loading, error, userCount, hasUsers, deleteUser } = storeToRefs(userStore)
+const { users, loading, error, userCount, hasUsers } = storeToRefs(userStore)
 
 import { onMounted } from 'vue'
 onMounted(() => {

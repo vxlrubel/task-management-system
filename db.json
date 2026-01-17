@@ -70,15 +70,6 @@
       "password": "Pa$$w0rd!",
       "avatar": "admin.png",
       "status": "active"
-    },
-    {
-      "id": "993c",
-      "role_id": 3,
-      "name": "Voluptatem corrupti",
-      "email": "Veniam cupiditate b",
-      "password": "Pa$$w0rd!",
-      "avatar": "admin.png",
-      "status": "active"
     }
   ],
   "teams": [
