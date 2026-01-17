@@ -70,6 +70,15 @@
       "password": "Pa$$w0rd!",
       "avatar": "admin.png",
       "status": "active"
+    },
+    {
+      "id": "b70f",
+      "role_id": 3,
+      "name": "Perferendis eos qui",
+      "email": "Consequatur ullamco",
+      "password": "Pa$$w0rd!",
+      "avatar": "admin.png",
+      "status": "active"
     }
   ],
   "teams": [
