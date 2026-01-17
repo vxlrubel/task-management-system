@@ -1,7 +1,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
-import Button from 'primevue/button'
+import { RouterLink } from 'vue-router'
 
 const userStore = useUserStore()
 const { users, loading, error, userCount, hasUsers, deleteUser } = storeToRefs(userStore)
@@ -36,12 +36,13 @@ onMounted(() => {
         <div class="flex justify-between">
           <div class="font-medium">{{ user.name }}</div>
           <div>
-            <button
+            <RouterLink
+              :to="'/users/' + user.id"
               type="button"
               class="bg-blue-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-blue-600 me-3"
             >
               <i class="pi pi-pen-to-square text-sm"></i>
-            </button>
+            </RouterLink>
             <button
               @click="userStore.deleteUser(user.id)"
               type="button"
