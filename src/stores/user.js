@@ -1,11 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import api from '@/services/api'
 
 // Create axios instance
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-})
 
 export const useUserStore = defineStore('user', () => {
   const users = ref([])
