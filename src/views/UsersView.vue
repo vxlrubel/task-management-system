@@ -1,18 +1,47 @@
 <script setup>
+import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { RouterLink } from 'vue-router'
-
+import Toast from 'primevue/toast'
+import ConfirmPopup from 'primevue/confirmpopup'
+import { useConfirm } from 'primevue/useconfirm'
+import { useToast } from 'primevue/usetoast'
+const confirm = useConfirm()
+const toast = useToast()
 const userStore = useUserStore()
 const { users, loading, error, userCount, hasUsers } = storeToRefs(userStore)
-
-import { onMounted } from 'vue'
 onMounted(() => {
   userStore.fetchUsers()
 })
+
+const delUser = (id) => {
+  confirm.require({
+    message: 'Do you want to delete this record?',
+    icon: 'pi pi-info-circle',
+    rejectProps: {
+      label: 'No',
+      severity: 'danger',
+      outlined: true,
+    },
+    acceptProps: {
+      label: 'Yes',
+      severity: 'info',
+    },
+    accept: () => {
+      userStore.deleteUser(id)
+      toast.add({ severity: 'success', summary: 'Confirmed', detail: 'Record deleted', life: 3000 })
+    },
+    reject: () => {
+      toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 })
+    },
+  })
+}
 </script>
 <template>
   <div class="p-4">
+    <Toast />
+    <ConfirmPopup></ConfirmPopup>
     <button
       @click.prevent="userStore.fetchUsers()"
       :disabled="loading"
@@ -44,7 +73,7 @@ onMounted(() => {
               <i class="pi pi-pen-to-square text-sm"></i>
             </RouterLink>
             <button
-              @click="userStore.deleteUser(user.id)"
+              @click="delUser(user.id)"
               type="button"
               class="bg-red-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-red-600"
             >
