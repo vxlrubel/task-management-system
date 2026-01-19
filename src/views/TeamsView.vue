@@ -31,7 +31,7 @@ const deleteTeam = (id) => {
     </div>
 
     <div v-if="error" class="mb-5">
-      <Message severity="error" :life="3000">Auto Disappear Message</Message>
+      <Message severity="error" :life="3000">{{ error }}</Message>
     </div>
 
     <div v-if="loading" class="flex justify-center">
