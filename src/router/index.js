@@ -21,7 +21,7 @@ const router = createRouter({
     },
     {
       path: '/user/:id',
-      name: 'Edit User',
+      name: 'Update User Info',
       component: () => import('../views/EditUserView.vue'),
     },
     {
@@ -45,9 +45,19 @@ const router = createRouter({
       component: () => import('../views/TeamsView.vue'),
     },
     {
+      path: '/team/:id',
+      name: 'Update Team Info',
+      component: () => import('../views/EditTeamView.vue'),
+    },
+    {
       path: '/team/add-new',
       name: 'Add new team',
       component: () => import('../views/AddTeamView.vue'),
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../views/LoginView.vue'),
     },
   ],
 })
