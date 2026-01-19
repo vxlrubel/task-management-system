@@ -4,11 +4,15 @@ import { storeToRefs } from 'pinia'
 import { RouterLink } from 'vue-router'
 import { useTeamsStore } from '@/stores/teams'
 import Badge from 'primevue/badge'
-
+import Toast from 'primevue/toast'
+import { useToast } from 'primevue/usetoast'
+import ConfirmPopup from 'primevue/confirmpopup'
+import { useConfirm } from 'primevue/useconfirm'
 import Message from 'primevue/message'
-
 import ProgressSpinner from 'primevue/progressspinner'
 
+const confirm = useConfirm()
+const toast = useToast()
 const teamStore = useTeamsStore()
 const { loading, error, teams, teamsCount, hasTeam } = storeToRefs(teamStore)
 
@@ -18,14 +22,33 @@ onMounted(() => {
 })
 
 const deleteTeam = (id) => {
-  if (!confirm('Are you sure?')) return
-  teams.value = []
-  //   delete process here
+  confirm.require({
+    message: 'Do you want to delete this record?',
+    icon: 'pi pi-info-circle',
+    rejectProps: {
+      label: 'No',
+      severity: 'danger',
+      outlined: true,
+    },
+    acceptProps: {
+      label: 'Yes',
+      severity: 'info',
+    },
+    accept: () => {
+      teamStore.deleteTeam(id)
+      toast.add({ severity: 'success', summary: 'Confirmed', detail: 'Record deleted', life: 3000 })
+    },
+    reject: () => {
+      toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 })
+    },
+  })
 }
 </script>
 
 <template>
   <div>
+    <Toast />
+    <ConfirmPopup></ConfirmPopup>
     <div class="text-sm border-b border-b-gray-400 mb-5 pb-2">
       All Teams <Badge :value="teamsCount"></Badge>
     </div>

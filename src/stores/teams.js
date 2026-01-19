@@ -23,5 +23,20 @@ export const useTeamsStore = defineStore('teams', () => {
     }
   }
 
-  return { loading, error, teams, teamsCount, hasTeam, getTeams }
+  const deleteTeam = async (id) => {
+    try {
+      if (!id) {
+        throw new Error('Team ID is required')
+      }
+
+      const response = await api.delete(team.delete(id))
+      teams.value = teams.value.filter((t) => t.id !== id)
+      return response.data
+    } catch (error) {
+      console.error('Error deleting team:', error.response?.data || error.message)
+      throw error
+    }
+  }
+
+  return { loading, error, teams, teamsCount, hasTeam, getTeams, deleteTeam }
 })
