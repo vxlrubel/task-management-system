@@ -37,6 +37,21 @@ export const useTeamsStore = defineStore('teams', () => {
       throw error
     }
   }
+  const createTeam = async (payload) => {
+    loading.value = true
+    error.value = null
 
-  return { loading, error, teams, teamsCount, hasTeam, getTeams, deleteTeam }
+    try {
+      const { data } = await api.post(team.create, payload)
+      teams.value.push(data)
+      return data
+    } catch (err) {
+      error.value = err.response?.data?.message || err.message
+      return null
+    } finally {
+      loading.value = false
+    }
+  }
+
+  return { loading, error, teams, teamsCount, hasTeam, getTeams, deleteTeam, createTeam }
 })
