@@ -12,13 +12,16 @@ import Toast from 'primevue/toast'
 import { useToast } from 'primevue/usetoast'
 import { team } from '@/services/endpoints'
 
+import { useAuth } from '@/stores/auth'
+const auth = useAuth()
+const { currentUserId } = storeToRefs(auth)
+
 const router = useRouter()
 const toast = useToast()
 const teamStore = useTeamsStore()
 const { loading } = storeToRefs(teamStore)
 const teamName = ref('')
 const teamDescription = ref('')
-const currentUserId = ref(1) // current user login user ID
 
 const createTeam = async () => {
   const payload = ref({
