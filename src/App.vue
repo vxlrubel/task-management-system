@@ -69,7 +69,11 @@ const menuGroup = reactive([
       <div
         class="h-[calc(100dvh-40px)] overflow-y-auto scrollbar-hide p-3 bg-[#1D1F21] text-[#f2f3f4]"
       >
-        <RouterView />
+        <RouterView v-slot="{ Component }">
+          <Transition name="fade-slide" mode="out-in">
+            <component :is="Component" />
+          </Transition>
+        </RouterView>
       </div>
     </div>
   </div>
