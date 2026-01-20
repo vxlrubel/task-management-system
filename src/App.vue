@@ -37,7 +37,7 @@ const menuGroup = reactive([
               <template v-if="group?.addNew">
                 <RouterLink
                   :to="group.addNew"
-                  class="cursor-pointer h-6 w-6 flex items-center justify-center"
+                  class="cursor-pointer h-6 w-6 flex items-center justify-center text-gray-500 hover:text-gray-50 transition-colors duration-200"
                 >
                   <IconPlus />
                 </RouterLink>
