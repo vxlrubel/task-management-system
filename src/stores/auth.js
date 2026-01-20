@@ -1,10 +1,12 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import api from '@/services/api'
+import { users } from '@/services/endpoints'
 
 export const useAuth = defineStore('auth', () => {
   // local stroage key
   const authUserKey = ref('auth_user')
-  // state
+  const isLoading = ref(false)
   const currentUserId = ref(null)
   const user = ref(null)
   const isLoggedIn = computed(() => !!currentUserId.value)
@@ -15,11 +17,30 @@ export const useAuth = defineStore('auth', () => {
     currentUserId.value = userData?.id || null
   }
 
-  function loginUser(userData) {
-    setUser(userData)
+  async function loginUser(payload) {
+    isLoading.value = true
+    try {
+      const { data } = await api.get(users.create, {
+        params: {
+          email: payload.email,
+          password: payload.password,
+          status: 'active',
+        },
+      })
 
-    // persist (optional)
-    localStorage.setItem(authUserKey.value, JSON.stringify(userData))
+      if (!data.length) {
+        throw new Error('Invalid email or password')
+      }
+
+      const loggedInUser = data[0]
+
+      setUser(loggedInUser)
+      localStorage.setItem(authUserKey.value, JSON.stringify(loggedInUser))
+    } catch (error) {
+      throw new Error(error)
+    } finally {
+      isLoading.value = false
+    }
   }
 
   function logoutUser() {
