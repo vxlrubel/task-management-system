@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import api from '@/services/api'
+import { users as endpoint } from '@/services/endpoints'
 
 // Create axios instance
 
@@ -8,7 +9,6 @@ export const useUserStore = defineStore('user', () => {
   const users = ref([])
   const loading = ref(false)
   const error = ref(null)
-  const apiEndPoint = ref('/users')
   const userCount = computed(() => users.value.length)
   const hasUsers = computed(() => users.value.length > 0)
 
@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', () => {
     error.value = null
 
     try {
-      const { data } = await api.get(apiEndPoint.value)
+      const { data } = await api.get(endpoint.list)
       users.value = data
     } catch (err) {
       error.value = err.response?.data?.message || err.message
@@ -47,7 +47,7 @@ export const useUserStore = defineStore('user', () => {
     error.value = null
 
     try {
-      const { data } = await api.post(apiEndPoint.value, userData)
+      const { data } = await api.post(endpoint.create, userData)
       users.value.push(data)
       return data
     } catch (err) {
@@ -62,7 +62,7 @@ export const useUserStore = defineStore('user', () => {
     error.value = null
 
     try {
-      const { data } = await api.patch(`${apiEndPoint.value}/${userId}`, userData)
+      const { data } = await api.patch(endpoint.update(userId), userData)
       const index = users.value.findIndex((user) => user.id === userId)
       if (index !== -1) {
         users.value[index] = data
@@ -83,7 +83,7 @@ export const useUserStore = defineStore('user', () => {
         throw new Error('User ID is required')
       }
 
-      const response = await api.delete(`${apiEndPoint.value}/${id}`)
+      const response = await api.delete(endpoint.delete(id))
       users.value = users.value.filter((user) => user.id !== id)
       return response.data
     } catch (error) {
