@@ -1,4 +1,4 @@
-export const user = {
+export const users = {
   list: '/users',
   create: '/users',
   single: (id) => `/users/${id}`,
