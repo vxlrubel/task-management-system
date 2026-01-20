@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import InputGroup from 'primevue/inputgroup'
 import InputGroupAddon from 'primevue/inputgroupaddon'
 import InputText from 'primevue/inputtext'
@@ -11,31 +12,57 @@ import Toast from 'primevue/toast'
 import { useToast } from 'primevue/usetoast'
 
 import { useAuth } from '@/stores/auth'
+
 const router = useRouter()
 const toast = useToast()
-
 const auth = useAuth()
+const { isLoading, isLoggedIn } = storeToRefs(auth)
 const email = ref('')
 const password = ref('')
 
-function login() {
+function loginWorning() {
+  toast.add({
+    severity: 'warn',
+    summary: 'Warning',
+    detail: 'Please enter email and password.',
+    life: 3000,
+  })
+}
+
+async function login() {
+  if (!email.value || !password.value) {
+    loginWorning()
+    return
+  }
+
   const payload = {
-    id: 1,
     email: email.value,
     password: password.value,
   }
 
-  auth.loginUser(payload)
+  try {
+    await auth.loginUser(payload)
 
-  toast.add({
-    severity: 'success',
-    summary: 'Success',
-    detail: 'Login Successfully.',
-    life: 3000,
-  })
-  setTimeout(() => {
-    router.push('/')
-  }, 1500)
+    if (isLoggedIn.value) {
+      toast.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Login Successfully.',
+        life: 3000,
+      })
+
+      setTimeout(() => {
+        router.push('/')
+      }, 1500)
+    }
+  } catch (error) {
+    toast.add({
+      severity: 'error',
+      summary: 'Login Failed',
+      detail: error.message || 'Invalid credentials',
+      life: 3000,
+    })
+  }
 }
 </script>
 
@@ -62,9 +89,9 @@ function login() {
         <InputGroupAddon>
           <i class="pi pi-key"></i>
         </InputGroupAddon>
-        <Password v-model="password" :invalid="!password" promptLabel="Enter a password" />
+        <Password v-model="password" placeholder="Enter a password" />
       </InputGroup>
     </div>
-    <Button type="submit" label="Login" icon="pi pi-check" />
+    <Button type="submit" label="Login" :loading="isLoading" icon="pi pi-check" />
   </form>
 </template>
