@@ -2,14 +2,24 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import api from '@/services/api'
 import { users } from '@/services/endpoints'
+import { ROLE_PERMISSIONS } from '@/config/permissions'
 
 export const useAuth = defineStore('auth', () => {
-  // local stroage key
+  // local storage key
   const authUserKey = ref('auth_user')
+
+  // state
   const isLoading = ref(false)
   const currentUserId = ref(null)
   const user = ref(null)
+
+  // getters
   const isLoggedIn = computed(() => !!currentUserId.value)
+
+  const permissions = computed(() => {
+    if (!user.value) return []
+    return ROLE_PERMISSIONS[user.value.role_id] || []
+  })
 
   // actions
   function setUser(userData) {
@@ -17,8 +27,13 @@ export const useAuth = defineStore('auth', () => {
     currentUserId.value = userData?.id || null
   }
 
+  function hasPermission(permission) {
+    return permissions.value.includes(permission)
+  }
+
   async function loginUser(payload) {
     isLoading.value = true
+
     try {
       const { data } = await api.get(users.create, {
         params: {
@@ -58,15 +73,18 @@ export const useAuth = defineStore('auth', () => {
 
   return {
     // state
+    isLoading,
     currentUserId,
     user,
 
     // getters
     isLoggedIn,
+    permissions,
 
     // actions
     loginUser,
     logoutUser,
     loadFromStorage,
+    hasPermission,
   }
 })
