@@ -51,6 +51,15 @@ const router = createRouter({
       },
     },
     {
+      path: '/user/show/:id/',
+      name: 'User Profile',
+      component: () => import('@/views/UserProfileView.vue'),
+      meta: {
+        requiresAuth: true,
+        permission: 'users:view',
+      },
+    },
+    {
       path: '/projects',
       name: 'Projects',
       component: () => import('@/views/ProjectsView.vue'),
