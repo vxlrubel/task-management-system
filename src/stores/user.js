@@ -32,7 +32,7 @@ export const useUserStore = defineStore('user', () => {
     error.value = null
 
     try {
-      const { data } = await api.get(`${apiEndPoint.value}/${id}`)
+      const { data } = await api.get(endpoint.single(id))
       return data
     } catch (err) {
       error.value = err.response?.data?.message || err.message
