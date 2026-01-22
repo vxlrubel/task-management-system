@@ -7,6 +7,7 @@ export const ROLES = {
 export const ROLE_PERMISSIONS = {
   [ROLES.ADMIN]: [
     'dashboard:view',
+    'tasks:view',
     'users:view',
     'users:create',
     'users:edit',
@@ -14,6 +15,7 @@ export const ROLE_PERMISSIONS = {
     'projects:create',
     'teams:view',
     'teams:create',
+    'teams:edit',
   ],
 
   [ROLES.HR]: ['dashboard:view', 'projects:view', 'projects:create', 'teams:view', 'teams:create'],
