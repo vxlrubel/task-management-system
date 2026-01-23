@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { RouterLink, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useTeamsStore } from '@/stores/teams'
 import Badge from 'primevue/badge'
 import Toast from 'primevue/toast'
