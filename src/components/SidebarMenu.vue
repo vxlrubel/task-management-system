@@ -34,3 +34,9 @@ const { menuGroup } = useSidebarMenu()
     </RouterLink>
   </div>
 </template>
+
+<style scoped>
+.router-link-active {
+  background: hsl(210, 5%, 25%);
+}
+</style>
