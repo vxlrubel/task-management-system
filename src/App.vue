@@ -19,7 +19,7 @@ import SidebarMenu from '@/components/SidebarMenu.vue'
         <LoginRegister />
       </div>
       <div
-        class="h-[calc(100dvh-40px)] overflow-y-auto scrollbar-hide p-3 bg-[#1D1F21] text-[#f2f3f4]"
+        class="h-[calc(100dvh-40px)] overflow-y-auto scrollbar-hide py-3 px-4 bg-[#1D1F21] text-[#f2f3f4]"
       >
         <RouterView v-slot="{ Component }">
           <Transition name="fade-slide" mode="out-in">

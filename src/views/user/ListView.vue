@@ -48,7 +48,7 @@ const visitEdit = (id) => {
 }
 </script>
 <template>
-  <div class="p-4">
+  <div>
     <Toast />
     <ConfirmPopup></ConfirmPopup>
     <button
