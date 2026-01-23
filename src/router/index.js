@@ -105,6 +105,15 @@ const router = createRouter({
       },
     },
     {
+      path: '/team/show/:id',
+      name: 'Team Information',
+      component: () => import('@/views/team/DetailsView.vue'),
+      meta: {
+        requiresAuth: true,
+        permission: 'teams:view',
+      },
+    },
+    {
       path: '/login',
       name: 'Login',
       component: () => import('@/views/LoginView.vue'),
