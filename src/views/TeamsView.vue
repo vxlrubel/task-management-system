@@ -60,8 +60,12 @@ const deleteTeam = (id) => {
     <div v-if="loading" class="flex justify-center">
       <ProgressSpinner />
     </div>
-    <div v-else-if="hasTeam" class="space-y-2">
-      <div v-for="team in teams" :key="team.id" class="p-4 border border-gray-300 rounded">
+    <div v-else-if="hasTeam" class="space-y-2 border-b border-gray-600 border-l border-r">
+      <div
+        v-for="team in teams"
+        :key="team.id"
+        class="p-3 border-t border-gray-600 cursor-pointer hover:bg-[hsl(210,6%,15%)]"
+      >
         <div class="flex justify-between">
           <div class="font-medium">{{ team.name }}</div>
           <div>
