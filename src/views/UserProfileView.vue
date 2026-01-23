@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
-import AppLink from '@/components/AppLink.vue'
+import LinkBack from '@/components/LinkBack.vue'
 const userStore = useUserStore()
 
 const route = useRoute()
@@ -30,7 +30,7 @@ onMounted(async () => {
   <div class="max-w-xl mx-auto mt-10">
     <div class="flex items-center justify-between pb-3 border-b border-gray-600 mb-4">
       <div>
-        <AppLink to="/users" />
+        <LinkBack />
       </div>
       <div class="flex-1 pl-3">User Information:</div>
     </div>
