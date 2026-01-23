@@ -10,8 +10,6 @@ import { useTeamsStore } from '@/stores/teams'
 import { useRouter } from 'vue-router'
 import Toast from 'primevue/toast'
 import { useToast } from 'primevue/usetoast'
-import { team } from '@/services/endpoints'
-
 import { useAuth } from '@/stores/auth'
 const auth = useAuth()
 const { currentUserId } = storeToRefs(auth)
@@ -34,7 +32,7 @@ const createTeam = async () => {
 
   if (result) {
     setTimeout(() => {
-      router.push(team.list)
+      router.push('/teams')
     }, 1500)
     successNotice()
   } else {

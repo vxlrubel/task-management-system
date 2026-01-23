@@ -80,7 +80,7 @@ const router = createRouter({
     {
       path: '/teams',
       name: 'Teams',
-      component: () => import('@/views/TeamsView.vue'),
+      component: () => import('@/views/team/ListView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'teams:view',
@@ -89,7 +89,7 @@ const router = createRouter({
     {
       path: '/team/add-new',
       name: 'Add Team',
-      component: () => import('@/views/AddTeamView.vue'),
+      component: () => import('@/views/team/AddView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'teams:create',
@@ -98,7 +98,7 @@ const router = createRouter({
     {
       path: '/team/:id',
       name: 'Edit Team',
-      component: () => import('@/views/EditTeamView.vue'),
+      component: () => import('@/views/team/EditView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'teams:edit',
@@ -107,7 +107,7 @@ const router = createRouter({
     {
       path: '/team/show/:id',
       name: 'Team Information',
-      component: () => import('@/views/team/DetailsView.vue'),
+      component: () => import('@/views/team/ShowView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'teams:view',
