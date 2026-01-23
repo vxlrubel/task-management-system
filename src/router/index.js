@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/users',
       name: 'Users',
-      component: () => import('@/views/UsersView.vue'),
+      component: () => import('@/views/user/ListView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'users:view',
@@ -35,7 +35,7 @@ const router = createRouter({
     {
       path: '/user/add-new',
       name: 'Add New User',
-      component: () => import('@/views/AddUserView.vue'),
+      component: () => import('@/views/user/AddView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'users:create',
@@ -44,7 +44,7 @@ const router = createRouter({
     {
       path: '/user/:id',
       name: 'Edit User',
-      component: () => import('@/views/EditUserView.vue'),
+      component: () => import('@/views/user/EditView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'users:edit',
@@ -53,7 +53,7 @@ const router = createRouter({
     {
       path: '/user/show/:id/',
       name: 'User Profile',
-      component: () => import('@/views/UserProfileView.vue'),
+      component: () => import('@/views/user/ShowView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'users:view',
