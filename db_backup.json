@@ -1,13 +1,24 @@
 {
   "roles": [
-    { "id": 1, "name": "admin", "description": "System Administrator" },
-    { "id": 2, "name": "hr", "description": "HR Manager" },
-    { "id": 3, "name": "employee", "description": "Employee User" }
+    {
+      "id": "1",
+      "name": "admin",
+      "description": "System Administrator"
+    },
+    {
+      "id": "2",
+      "name": "hr",
+      "description": "HR Manager"
+    },
+    {
+      "id": "3",
+      "name": "employee",
+      "description": "Employee User"
+    }
   ],
-
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "role_id": 1,
       "name": "Admin User",
       "email": "admin@example.com",
@@ -16,7 +27,7 @@
       "status": "active"
     },
     {
-      "id": 2,
+      "id": "2",
       "role_id": 2,
       "name": "HR Manager",
       "email": "hr@example.com",
@@ -25,7 +36,7 @@
       "status": "active"
     },
     {
-      "id": 3,
+      "id": "3",
       "role_id": 3,
       "name": "John Employee",
       "email": "john@example.com",
@@ -34,34 +45,124 @@
       "status": "active"
     },
     {
-      "id": 4,
+      "id": "4",
       "role_id": 3,
       "name": "Sara Employee",
       "email": "sara@example.com",
       "password": "employee123",
       "avatar": "sara.png",
       "status": "active"
+    },
+    {
+      "id": "5",
+      "role_id": 3,
+      "name": "Michael Employee",
+      "email": "michael@example.com",
+      "password": "employee123",
+      "avatar": "michael.png",
+      "status": "active"
+    },
+    {
+      "id": "6",
+      "role_id": 3,
+      "name": "Emma Employee",
+      "email": "emma@example.com",
+      "password": "employee123",
+      "avatar": "emma.png",
+      "status": "active"
+    },
+    {
+      "id": "7",
+      "role_id": 2,
+      "name": "Finance Manager",
+      "email": "finance@example.com",
+      "password": "finance123",
+      "avatar": "finance.png",
+      "status": "active"
+    },
+    {
+      "id": "8",
+      "role_id": 3,
+      "name": "David Employee",
+      "email": "david@example.com",
+      "password": "employee123",
+      "avatar": "david.png",
+      "status": "active"
+    },
+    {
+      "id": "9",
+      "role_id": 3,
+      "name": "Linda Employee",
+      "email": "linda@example.com",
+      "password": "employee123",
+      "avatar": "linda.png",
+      "status": "active"
+    },
+    {
+      "id": "10",
+      "role_id": 3,
+      "name": "Robert Employee",
+      "email": "robert@example.com",
+      "password": "employee123",
+      "avatar": "robert.png",
+      "status": "active"
     }
   ],
-
   "teams": [
     {
       "id": 1,
       "name": "Frontend Team",
       "description": "Handles UI and frontend logic",
       "created_by": 2
+    },
+    {
+      "id": 2,
+      "name": "Backend Team",
+      "description": "Manages server-side logic and APIs",
+      "created_by": 1
+    },
+    {
+      "id": 3,
+      "name": "Design Team",
+      "description": "Responsible for UI/UX and visual design",
+      "created_by": 2
+    },
+    {
+      "id": 4,
+      "name": "QA Team",
+      "description": "Ensures product quality and testing",
+      "created_by": 2
+    },
+    {
+      "id": 5,
+      "name": "DevOps Team",
+      "description": "Handles deployment, CI/CD, and infrastructure",
+      "created_by": 1
     }
   ],
-
   "team_members": [
-    { "id": 1, "team_id": 1, "user_id": 2, "role": "lead" },
-    { "id": 2, "team_id": 1, "user_id": 3, "role": "member" },
-    { "id": 3, "team_id": 1, "user_id": 4, "role": "member" }
+    {
+      "id": "1",
+      "team_id": 1,
+      "user_id": 2,
+      "role": "lead"
+    },
+    {
+      "id": "2",
+      "team_id": 1,
+      "user_id": 3,
+      "role": "member"
+    },
+    {
+      "id": "3",
+      "team_id": 1,
+      "user_id": 4,
+      "role": "member"
+    }
   ],
-
   "projects": [
     {
-      "id": 1,
+      "id": "1",
       "team_id": 1,
       "name": "Task Management App",
       "description": "Asana-like project using Vue",
@@ -69,12 +170,51 @@
       "start_date": "2026-01-01",
       "end_date": "2026-03-31",
       "created_by": 2
+    },
+    {
+      "id": "2",
+      "team_id": 2,
+      "name": "REST API Platform",
+      "description": "Laravel-based API system for internal tools",
+      "status": "active",
+      "start_date": "2026-01-10",
+      "end_date": "2026-04-30",
+      "created_by": 1
+    },
+    {
+      "id": "3",
+      "team_id": 3,
+      "name": "UI Redesign",
+      "description": "Complete UI/UX overhaul for the dashboard",
+      "status": "completed",
+      "start_date": "2025-10-01",
+      "end_date": "2025-12-15",
+      "created_by": 2
+    },
+    {
+      "id": "4",
+      "team_id": 4,
+      "name": "Automation Testing Suite",
+      "description": "End-to-end testing using Cypress",
+      "status": "active",
+      "start_date": "2026-02-01",
+      "end_date": "2026-05-31",
+      "created_by": 2
+    },
+    {
+      "id": "5",
+      "team_id": 5,
+      "name": "CI/CD Pipeline Setup",
+      "description": "Automated deployment using GitHub Actions",
+      "status": "pending",
+      "start_date": "2026-03-01",
+      "end_date": "2026-06-30",
+      "created_by": 1
     }
   ],
-
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "project_id": 1,
       "parent_id": null,
       "title": "Design Dashboard UI",
@@ -87,7 +227,7 @@
       "assigned_to": 3
     },
     {
-      "id": 2,
+      "id": "2",
       "project_id": 1,
       "parent_id": 1,
       "title": "Create Sidebar Component",
@@ -100,7 +240,7 @@
       "assigned_to": 4
     },
     {
-      "id": 3,
+      "id": "3",
       "project_id": 1,
       "parent_id": null,
       "title": "Setup Pinia Stores",
@@ -111,29 +251,174 @@
       "due_date": "2026-01-12",
       "created_by": 2,
       "assigned_to": 3
+    },
+    {
+      "id": "4",
+      "project_id": 1,
+      "parent_id": 3,
+      "title": "Auth Store",
+      "description": "Implement login, logout, persistence",
+      "priority": "high",
+      "status": "in_progress",
+      "start_date": "2026-01-04",
+      "due_date": "2026-01-08",
+      "created_by": 2,
+      "assigned_to": 3
+    },
+    {
+      "id": "5",
+      "project_id": 1,
+      "parent_id": 3,
+      "title": "Task Store",
+      "description": "CRUD operations for tasks",
+      "priority": "medium",
+      "status": "todo",
+      "start_date": "2026-01-07",
+      "due_date": "2026-01-12",
+      "created_by": 2,
+      "assigned_to": 4
+    },
+    {
+      "id": "6",
+      "project_id": 2,
+      "parent_id": null,
+      "title": "Design API Architecture",
+      "description": "Plan controllers, services, and routes",
+      "priority": "high",
+      "status": "completed",
+      "start_date": "2026-01-10",
+      "due_date": "2026-01-15",
+      "created_by": 1,
+      "assigned_to": 3
+    },
+    {
+      "id": "7",
+      "project_id": 2,
+      "parent_id": null,
+      "title": "Implement Auth APIs",
+      "description": "JWT authentication for API users",
+      "priority": "high",
+      "status": "in_progress",
+      "start_date": "2026-01-16",
+      "due_date": "2026-01-25",
+      "created_by": 1,
+      "assigned_to": 5
+    },
+    {
+      "id": "8",
+      "project_id": 3,
+      "parent_id": null,
+      "title": "Create Design System",
+      "description": "Define colors, typography, and components",
+      "priority": "medium",
+      "status": "completed",
+      "start_date": "2025-10-05",
+      "due_date": "2025-10-25",
+      "created_by": 2,
+      "assigned_to": 6
+    },
+    {
+      "id": "9",
+      "project_id": 4,
+      "parent_id": null,
+      "title": "Write Cypress Tests",
+      "description": "Add e2e tests for critical flows",
+      "priority": "medium",
+      "status": "todo",
+      "start_date": "2026-02-05",
+      "due_date": "2026-02-20",
+      "created_by": 2,
+      "assigned_to": 4
+    },
+    {
+      "id": "10",
+      "project_id": 5,
+      "parent_id": null,
+      "title": "Setup GitHub Actions",
+      "description": "Configure build and deployment pipeline",
+      "priority": "high",
+      "status": "pending",
+      "start_date": "2026-03-05",
+      "due_date": "2026-03-20",
+      "created_by": 1,
+      "assigned_to": 5
     }
   ],
-
   "task_comments": [
     {
-      "id": 1,
+      "id": "1",
       "task_id": 1,
       "user_id": 3,
       "comment": "Dashboard UI base layout completed",
       "created_at": "2026-01-08 10:30:00"
     },
     {
-      "id": 2,
+      "id": "2",
       "task_id": 2,
       "user_id": 4,
       "comment": "Sidebar component structure ready",
       "created_at": "2026-01-09 15:10:00"
+    },
+    {
+      "id": "3",
+      "task_id": 1,
+      "user_id": 2,
+      "comment": "Looks good so far, please align spacing with design system",
+      "created_at": "2026-01-09 17:45:00"
+    },
+    {
+      "id": "4",
+      "task_id": 3,
+      "user_id": 3,
+      "comment": "Pinia stores structure created",
+      "created_at": "2026-01-07 11:20:00"
+    },
+    {
+      "id": "5",
+      "task_id": 4,
+      "user_id": 3,
+      "comment": "Auth store login and logout implemented",
+      "created_at": "2026-01-06 14:05:00"
+    },
+    {
+      "id": "6",
+      "task_id": 5,
+      "user_id": 4,
+      "comment": "Task store CRUD methods added",
+      "created_at": "2026-01-10 09:40:00"
+    },
+    {
+      "id": "7",
+      "task_id": 6,
+      "user_id": 1,
+      "comment": "API architecture approved, proceed with implementation",
+      "created_at": "2026-01-15 16:30:00"
+    },
+    {
+      "id": "8",
+      "task_id": 7,
+      "user_id": 5,
+      "comment": "JWT authentication partially implemented",
+      "created_at": "2026-01-20 13:15:00"
+    },
+    {
+      "id": "9",
+      "task_id": 8,
+      "user_id": 6,
+      "comment": "Design system finalized and shared with dev team",
+      "created_at": "2025-10-24 18:00:00"
+    },
+    {
+      "id": "10",
+      "task_id": 9,
+      "user_id": 4,
+      "comment": "Started writing Cypress test cases",
+      "created_at": "2026-02-06 10:10:00"
     }
   ],
-
   "task_activity_logs": [
     {
-      "id": 1,
+      "id": "1",
       "task_id": 1,
       "user_id": 3,
       "action": "status_changed",
@@ -142,24 +427,167 @@
       "created_at": "2026-01-07 09:00:00"
     },
     {
-      "id": 2,
+      "id": "2",
       "task_id": 3,
       "user_id": 2,
       "action": "assigned",
       "old_value": null,
       "new_value": "John Employee",
       "created_at": "2026-01-06 11:00:00"
+    },
+    {
+      "id": "3",
+      "task_id": 2,
+      "user_id": 4,
+      "action": "status_changed",
+      "old_value": "todo",
+      "new_value": "in_progress",
+      "created_at": "2026-01-08 10:15:00"
+    },
+    {
+      "id": "4",
+      "task_id": 2,
+      "user_id": 2,
+      "action": "priority_changed",
+      "old_value": "low",
+      "new_value": "medium",
+      "created_at": "2026-01-08 16:40:00"
+    },
+    {
+      "id": "5",
+      "task_id": 4,
+      "user_id": 3,
+      "action": "status_changed",
+      "old_value": "in_progress",
+      "new_value": "review",
+      "created_at": "2026-01-09 12:00:00"
+    },
+    {
+      "id": "6",
+      "task_id": 5,
+      "user_id": 4,
+      "action": "assigned",
+      "old_value": "Sara Employee",
+      "new_value": "John Employee",
+      "created_at": "2026-01-10 09:30:00"
+    },
+    {
+      "id": "7",
+      "task_id": 6,
+      "user_id": 1,
+      "action": "status_changed",
+      "old_value": "in_progress",
+      "new_value": "completed",
+      "created_at": "2026-01-15 17:10:00"
+    },
+    {
+      "id": "8",
+      "task_id": 7,
+      "user_id": 1,
+      "action": "due_date_changed",
+      "old_value": "2026-01-25",
+      "new_value": "2026-01-30",
+      "created_at": "2026-01-18 14:45:00"
+    },
+    {
+      "id": "9",
+      "task_id": 8,
+      "user_id": 2,
+      "action": "status_changed",
+      "old_value": "in_progress",
+      "new_value": "completed",
+      "created_at": "2025-10-24 18:30:00"
+    },
+    {
+      "id": "10",
+      "task_id": 9,
+      "user_id": 4,
+      "action": "status_changed",
+      "old_value": "todo",
+      "new_value": "in_progress",
+      "created_at": "2026-02-06 10:20:00"
     }
   ],
-
   "notifications": [
     {
-      "id": 1,
+      "id": "1",
       "user_id": 3,
       "type": "task_assigned",
       "message": "You have been assigned a new task: Design Dashboard UI",
       "is_read": false,
       "created_at": "2026-01-05 14:00:00"
+    },
+    {
+      "id": "2",
+      "user_id": 4,
+      "type": "task_assigned",
+      "message": "You have been assigned a new task: Create Sidebar Component",
+      "is_read": true,
+      "created_at": "2026-01-06 09:30:00"
+    },
+    {
+      "id": "3",
+      "user_id": 3,
+      "type": "task_status_changed",
+      "message": "Task status updated to In Progress: Design Dashboard UI",
+      "is_read": false,
+      "created_at": "2026-01-07 09:05:00"
+    },
+    {
+      "id": "4",
+      "user_id": 2,
+      "type": "task_comment",
+      "message": "New comment added on task: Design Dashboard UI",
+      "is_read": true,
+      "created_at": "2026-01-09 17:50:00"
+    },
+    {
+      "id": "5",
+      "user_id": 3,
+      "type": "task_comment",
+      "message": "New comment added on task: Setup Pinia Stores",
+      "is_read": false,
+      "created_at": "2026-01-07 11:25:00"
+    },
+    {
+      "id": "6",
+      "user_id": 5,
+      "type": "task_assigned",
+      "message": "You have been assigned a new task: Implement Auth APIs",
+      "is_read": false,
+      "created_at": "2026-01-16 10:00:00"
+    },
+    {
+      "id": "7",
+      "user_id": 1,
+      "type": "task_completed",
+      "message": "Task completed: Design API Architecture",
+      "is_read": true,
+      "created_at": "2026-01-15 17:15:00"
+    },
+    {
+      "id": "8",
+      "user_id": 4,
+      "type": "task_due_date_changed",
+      "message": "Due date updated for task: Write Cypress Tests",
+      "is_read": false,
+      "created_at": "2026-02-06 10:25:00"
+    },
+    {
+      "id": "9",
+      "user_id": 6,
+      "type": "task_completed",
+      "message": "Task completed: Create Design System",
+      "is_read": true,
+      "created_at": "2025-10-24 18:35:00"
+    },
+    {
+      "id": "10",
+      "user_id": 2,
+      "type": "project_created",
+      "message": "New project created: CI/CD Pipeline Setup",
+      "is_read": false,
+      "created_at": "2026-03-01 09:00:00"
     }
   ]
 }
