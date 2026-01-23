@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { useTeamsStore } from '@/stores/teams'
 import Badge from 'primevue/badge'
 import Toast from 'primevue/toast'
@@ -10,7 +10,7 @@ import ConfirmPopup from 'primevue/confirmpopup'
 import { useConfirm } from 'primevue/useconfirm'
 import Message from 'primevue/message'
 import ProgressSpinner from 'primevue/progressspinner'
-
+const router = useRouter()
 const confirm = useConfirm()
 const toast = useToast()
 const teamStore = useTeamsStore()
@@ -43,6 +43,12 @@ const deleteTeam = (id) => {
     },
   })
 }
+const editTeam = (id) => {
+  router.push('/team/' + id)
+}
+const teamVisit = (id) => {
+  router.push('/team/show/' + id)
+}
 </script>
 
 <template>
@@ -60,35 +66,38 @@ const deleteTeam = (id) => {
     <div v-if="loading" class="flex justify-center">
       <ProgressSpinner />
     </div>
-    <div v-else-if="hasTeam" class="space-y-2 border-b border-gray-600 border-l border-r">
-      <div
-        v-for="team in teams"
-        :key="team.id"
-        class="p-3 border-t border-gray-600 cursor-pointer hover:bg-[hsl(210,6%,15%)]"
-      >
-        <div class="flex justify-between">
-          <div class="font-medium">{{ team.name }}</div>
-          <div>
-            <RouterLink
-              :to="'/team/' + team.id"
-              type="button"
-              class="bg-blue-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-blue-600 me-3"
-            >
-              <i class="pi pi-pen-to-square text-sm"></i>
-            </RouterLink>
-            <button
-              @click="deleteTeam(team.id)"
-              type="button"
-              class="bg-red-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-red-600"
-            >
-              <i class="pi pi-trash text-sm"></i>
-            </button>
+    <div v-else-if="hasTeam">
+      <div class="space-y-2 border-b border-gray-600 border-l border-r">
+        <div
+          @click.prevent="teamVisit(team.id)"
+          v-for="team in teams"
+          :key="team.id"
+          class="p-3 border-t border-gray-600 cursor-pointer hover:bg-[hsl(210,6%,15%)]"
+        >
+          <div class="flex justify-between">
+            <div class="font-medium">{{ team.name }}</div>
+            <div>
+              <button
+                @click.stop="editTeam(team.id)"
+                type="button"
+                class="bg-blue-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-blue-600 me-3"
+              >
+                <i class="pi pi-pen-to-square text-sm"></i>
+              </button>
+              <button
+                @click.prevent.stop="deleteTeam(team.id)"
+                type="button"
+                class="bg-red-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-red-600"
+              >
+                <i class="pi pi-trash text-sm"></i>
+              </button>
+            </div>
           </div>
-        </div>
 
-        <p class="text-sm text-gray-400 line-clamp-1">
-          {{ team?.description }}
-        </p>
+          <p class="text-sm text-gray-400 line-clamp-1">
+            {{ team?.description }}
+          </p>
+        </div>
       </div>
     </div>
     <div v-else>No Team found</div>
