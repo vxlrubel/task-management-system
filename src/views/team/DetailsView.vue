@@ -1,10 +1,11 @@
 <script setup>
 import { onMounted, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useTeamsStore } from '@/stores/teams'
 import LinkBack from '@/components/LinkBack.vue'
 import ItemsView from '@/components/ItemsView.vue'
 const route = useRoute()
+const router = useRouter()
 const teamStore = useTeamsStore()
 
 onMounted(() => {
@@ -14,9 +15,9 @@ onMounted(() => {
 const team = computed(() => teamStore.singleTeam)
 const members = computed(() => teamStore.members)
 
-console.log(members)
-
-console.log(teamStore)
+const viewMember = (item) => {
+  router.push('/user/show/' + item.id)
+}
 </script>
 
 <template>
@@ -36,7 +37,7 @@ console.log(teamStore)
         <div class="font-bold mb-4">Team Members</div>
       </div>
       <div class="space-y-3">
-        <ItemsView :items="members" />
+        <ItemsView :items="members" :onItemClick="viewMember" />
       </div>
     </div>
   </div>

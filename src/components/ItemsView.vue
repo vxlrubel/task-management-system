@@ -1,9 +1,13 @@
 <script setup>
 import { defineProps } from 'vue'
-defineProps({
+const props = defineProps({
   items: {
     type: Array,
     required: true,
+  },
+  onItemClick: {
+    type: Function,
+    default: null,
   },
 })
 const itemInitials = (name) => {
@@ -14,12 +18,16 @@ const itemInitials = (name) => {
     .slice(0, 2)
     .join('')
 }
+const handleClick = (item) => {
+  if (props.onItemClick) props.onItemClick(item)
+}
 </script>
 <template>
   <div>
     <div
       class="flex mb-2 hover:bg-gray-600/20 cursor-pointer"
       v-for="(item, index) in items"
+      @click="handleClick(item)"
       :key="item.id + index"
     >
       <div
