@@ -1,20 +1,87 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import Toast from 'primevue/toast'
 import ConfirmPopup from 'primevue/confirmpopup'
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
+
+import ListItem from '@/components/ListItem.vue'
+import SearchBox from '@/components/SearchBox.vue'
+import PaginationItems from '@/components/PaginationItems.vue'
+
 const confirm = useConfirm()
 const toast = useToast()
 const userStore = useUserStore()
 const { users, loading, error, userCount, hasUsers } = storeToRefs(userStore)
 const router = useRouter()
+const route = useRoute()
+
+// Pagination & Search state
+const searchQuery = ref('')
+const currentPage = ref(1)
+const perPage = 10
+
+// Filtered users based on search
+const filteredUsers = computed(() => {
+  if (!searchQuery.value) return users.value
+
+  const query = searchQuery.value.toLowerCase()
+  return users.value.filter(
+    (user) =>
+      user.name?.toLowerCase().includes(query) ||
+      user.email?.toLowerCase().includes(query) ||
+      user.username?.toLowerCase().includes(query),
+  )
+})
+
+// Pagination calculations
+const totalPages = computed(() => Math.ceil(filteredUsers.value.length / perPage))
+
+const paginatedUsers = computed(() => {
+  const start = (currentPage.value - 1) * perPage
+  const end = start + perPage
+  return filteredUsers.value.slice(start, end)
+})
+
+// Initialize page from URL
 onMounted(() => {
+  const pageParam = route.query.page
+  if (pageParam && !isNaN(pageParam)) {
+    currentPage.value = parseInt(pageParam)
+  }
   userStore.fetchUsers()
 })
+
+// Watch for page changes and update URL
+watch(currentPage, (newPage) => {
+  router.push({ query: { page: newPage } })
+})
+
+// Watch route query changes (browser back/forward)
+watch(
+  () => route.query.page,
+  (newPage) => {
+    if (newPage && !isNaN(newPage)) {
+      currentPage.value = parseInt(newPage)
+    } else {
+      currentPage.value = 1
+    }
+  },
+)
+
+// Handle search event
+const handleSearch = (query) => {
+  searchQuery.value = query
+  currentPage.value = 1 // Reset to first page on search
+}
+
+// Handle page change event
+const handlePageChange = (page) => {
+  currentPage.value = page
+}
 
 const delUser = (id) => {
   confirm.require({
@@ -47,17 +114,16 @@ const visitEdit = (id) => {
   router.push(`/user/${id}`)
 }
 </script>
+
 <template>
   <div>
     <Toast />
     <ConfirmPopup></ConfirmPopup>
-    <button
-      @click.prevent="userStore.fetchUsers()"
-      :disabled="loading"
-      class="px-4 py-2 bg-blue-500 text-white rounded mb-4"
-    >
-      {{ loading ? 'Loading...' : 'Fetch Users' }}
-    </button>
+
+    <div class="mb-4 flex gap-4 items-center justify-center">
+      <!-- Search Component -->
+      <SearchBox placeholder="Search users by name, email, or username..." @search="handleSearch" />
+    </div>
 
     <!-- Error message -->
     <div v-if="error" class="bg-red-100 text-red-700 p-3 rounded mb-4">
@@ -68,38 +134,35 @@ const visitEdit = (id) => {
     <div v-if="loading" class="text-gray-600">Loading users...</div>
 
     <!-- Users list -->
-    <div v-else-if="hasUsers" class="space-y-2">
-      <p class="text-sm mb-2">Total users: {{ userCount }}</p>
-      <div class="border-b border-gray-600 border-l border-r">
-        <div
-          v-for="user in users"
-          :key="user.id"
-          @click="visitDetails(user.id)"
-          class="p-3 border-t border-gray-600 cursor-pointer hover:bg-[hsl(210,6%,15%)]"
-        >
-          <div class="flex justify-between">
-            <div class="font-medium">{{ user.name }}</div>
-            <div>
-              <button
-                @click.stop="visitEdit(user.id)"
-                type="button"
-                class="bg-blue-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-blue-600 me-3"
-              >
-                <i class="pi pi-pen-to-square text-sm"></i>
-              </button>
-              <button
-                @click.stop="delUser(user.id)"
-                type="button"
-                class="bg-red-500 text-sm inline-flex items-center justify-center h-8 w-8 rounded-full cursor-pointer hover:bg-red-600"
-              >
-                <i class="pi pi-trash text-sm"></i>
-              </button>
-            </div>
-          </div>
-          <p class="text-sm text-gray-400">{{ user.email }}</p>
-        </div>
+    <template v-else-if="hasUsers">
+      <!-- Search results info -->
+      <p class="text-sm mb-2">
+        <span v-if="searchQuery">
+          Found {{ filteredUsers.length }} user(s) matching "{{ searchQuery }}"
+        </span>
+        <span v-else> Total users: {{ userCount }} </span>
+      </p>
+
+      <!-- Users -->
+      <div v-if="paginatedUsers.length > 0" class="space-y-2 mb-4">
+        <ListItem
+          :items="paginatedUsers"
+          :onVisit="visitDetails"
+          :onEdit="visitEdit"
+          :onDelete="delUser"
+        />
       </div>
-    </div>
+
+      <!-- No results message -->
+      <div v-else class="text-gray-500 mb-4">No users found matching "{{ searchQuery }}"</div>
+
+      <!-- Pagination Component -->
+      <PaginationItems
+        :current-page="currentPage"
+        :total-pages="totalPages"
+        @page-change="handlePageChange"
+      />
+    </template>
 
     <!-- No users message -->
     <div v-else class="text-gray-500">No users found. Click "Fetch Users" to load data.</div>
