@@ -62,7 +62,7 @@ const router = createRouter({
     {
       path: '/projects',
       name: 'Projects',
-      component: () => import('@/views/ProjectsView.vue'),
+      component: () => import('@/views/project/ProjectsView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'projects:view',
@@ -71,7 +71,7 @@ const router = createRouter({
     {
       path: '/project/add-new',
       name: 'Add Project',
-      component: () => import('@/views/AddProjectView.vue'),
+      component: () => import('@/views/project/AddProjectView.vue'),
       meta: {
         requiresAuth: true,
         permission: 'projects:create',
