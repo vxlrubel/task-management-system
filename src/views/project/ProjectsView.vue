@@ -1,18 +1,21 @@
 <script setup>
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/project'
 import ListItem from '@/components/ListItem.vue'
 const projectStore = useProjectStore()
-
 const { loading, error, projects, hasProject } = storeToRefs(projectStore)
 
+const router = useRouter()
 onMounted(async () => {
   await projectStore.fetchProject()
 })
 
 const handleVisit = (id) => {
-  alert('Handle visit:', id)
+  const url = `/project/show/${id}`
+  router.push(url)
+  console.log('handle visit: ', url)
 }
 
 const handleEdit = (id) => {
@@ -35,7 +38,7 @@ const handleDelete = (id) => {
     <template v-else-if="hasProject && !loading">
       <ListItem
         :items="projects"
-        :on-visit="handleVisit"
+        :onVisit="handleVisit"
         :on-edit="handleEdit"
         :on-delete="handleDelete"
       />
