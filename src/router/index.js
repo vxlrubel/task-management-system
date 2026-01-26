@@ -69,6 +69,15 @@ const router = createRouter({
       },
     },
     {
+      path: '/project/show/:id',
+      name: 'Projects Details',
+      component: () => import('@/views/project/ShowView.vue'),
+      meta: {
+        requiresAuth: true,
+        permission: 'projects:view',
+      },
+    },
+    {
       path: '/project/add-new',
       name: 'Add Project',
       component: () => import('@/views/project/AddProjectView.vue'),
