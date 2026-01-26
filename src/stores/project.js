@@ -7,6 +7,7 @@ export const useProjectStore = defineStore('project', () => {
   const loading = ref(false)
   const error = ref(null)
   const projects = ref([])
+  const project = ref({})
   const projectCount = computed(() => projects.value.length)
   const hasProject = computed(() => projects.value.length > 0)
 
@@ -27,6 +28,29 @@ export const useProjectStore = defineStore('project', () => {
     }
   }
 
+  const fetchProjectById = async (id) => {
+    loading.value = true
+    error.value = null
+    try {
+      const { data } = await api.get(projectEndpoint.single(id))
+      project.value = data
+    } catch (error) {
+      error.value = error
+      throw new Error(error)
+    } finally {
+      loading.value = false
+    }
+  }
+
   //   return values
-  return { loading, error, projects, projectCount, hasProject, fetchProject }
+  return {
+    loading,
+    error,
+    projects,
+    project,
+    projectCount,
+    hasProject,
+    fetchProject,
+    fetchProjectById,
+  }
 })
