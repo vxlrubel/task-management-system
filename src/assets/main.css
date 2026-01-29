@@ -63,3 +63,15 @@ body {
   opacity: 0;
   transform: translateX(-10px);
 }
+
+.custom-date-picker .p-inputtext {
+  all: unset;
+  display: inline-flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 !important;
+  font-size: 13px !important;
+  border: 0 !important;
+  color: #99a1af !important;
+  outline: 0 !important;
+}

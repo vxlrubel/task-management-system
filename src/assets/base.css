@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+@layer components {
+  .button {
+    @apply w-13 h-7 items-center cursor-pointer justify-center bg-[hsl(210,6%,20%)] inline-flex text-sm hover:bg-[hsl(210,6%,25%)] transition-colors px-3 text-gray-300 hover:text-gray-50;
+  }
+  .task-list {
+    @apply flex items-center border-b border-gray-600 cursor-pointer transition duration-150 text-gray-400 hover:text-gray-300;
+  }
+  .bg-content {
+    @apply bg-[hsl(210,6%,12%)];
+  }
+}
