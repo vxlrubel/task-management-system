@@ -38,6 +38,27 @@ onMounted(async () => {
       <div class="mt-3">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div class="grid grid-cols-1 text-sm border-t border-l border-r border-gray-600">
-            
+            <div class="task-list" v-for="n in 10">
+              <div class="flex-1 p-1">task name</div>
+              <div
+                class="w-60 p-1 flex items-center gap-1 border-l border-gray-600 text-[13px] relative z-10"
+              >
+                <IconPlus />
+                Asign
+              </div>
+              <div
+                class="w-40 p-1 flex items-center gap-1 border-l border-gray-600 custom-date-picker"
+              >
+                <DatePicker />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <Editor v-model="value" editorStyle="height: 320px" />
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
