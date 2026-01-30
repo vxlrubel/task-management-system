@@ -26,13 +26,19 @@ export const useUserStore = defineStore('user', () => {
       loading.value = false
     }
   }
-
   const fetchUserById = async (id) => {
+    if (!id) return null
+
+    // ✅ return from cache
+    const existing = users.value.find((u) => u.id === id)
+    if (existing) return existing
+
     loading.value = true
     error.value = null
 
     try {
       const { data } = await api.get(endpoint.single(id))
+      users.value.push(data) // 🔥 cache it
       return data
     } catch (err) {
       error.value = err.response?.data?.message || err.message
@@ -92,12 +98,22 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  const getUserNameById = (id) => {
+    return users.value.find((u) => u.id === id)?.name || 'Loading...'
+  }
+  const fetchUserNameById = async (userId) => {
+    const user = await fetchUserById(userId)
+    return user?.name ?? null
+  }
+
   return {
     users,
     loading,
     error,
     userCount,
     hasUsers,
+    fetchUserNameById,
+    getUserNameById,
     fetchUsers,
     fetchUserById,
     createUser,
